@@ -1,1 +1,1 @@
-golang gist
+personal golang snippet
