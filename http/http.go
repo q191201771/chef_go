@@ -8,7 +8,7 @@ import (
 )
 
 func Get(path string, queries map[string]string, headers map[string]string) (string, error) {
-	url := composeURL(path, queries)
+	url := ComposeURL(path, queries)
 
 	client := &http.Client{}
 	req, err := http.NewRequest("GET", url, nil)
@@ -42,6 +42,17 @@ func Get(path string, queries map[string]string, headers map[string]string) (str
 	}
 }
 
+func ComposeURL(path string, queries map[string]string) string {
+	if len(queries) == 0 {
+		return path
+	}
+	return fmt.Sprintf(
+		"%s?%s",
+		path,
+		marshalQueries(queries),
+	)
+}
+
 func marshalQueries(kv map[string]string) string {
 	if len(kv) == 0 {
 		return ""
@@ -53,15 +64,4 @@ func marshalQueries(kv map[string]string) string {
 		ret += pair
 	}
 	return ret[:len(ret)-1]
-}
-
-func composeURL(path string, queries map[string]string) string {
-	if len(queries) == 0 {
-		return path
-	}
-	return fmt.Sprintf(
-		"%s?%s",
-		path,
-		marshalQueries(queries),
-	)
 }
