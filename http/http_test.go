@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestFetch(t *testing.T) {
+func TestGet(t *testing.T) {
 	log.Println(Get("http://www.baidu.com", nil, nil))
 }
 

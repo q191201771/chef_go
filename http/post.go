@@ -2,16 +2,15 @@ package http
 
 import (
 	"compress/gzip"
-	"fmt"
 	"io/ioutil"
 	"net/http"
+	"strings"
 )
 
-func Get(path string, queries map[string]string, headers map[string]string) (string, error) {
-	url := ComposeURL(path, queries)
-
+func Post(path string, headers map[string]string, formDatas map[string]string) (string, error) {
 	client := &http.Client{}
-	req, err := http.NewRequest("GET", url, nil)
+	reqBody := strings.NewReader(URLEncode(formDatas))
+	req, err := http.NewRequest("POST", path, reqBody)
 	if err != nil {
 		return "", err
 	}
@@ -40,28 +39,5 @@ func Get(path string, queries map[string]string, headers map[string]string) (str
 		body, err := ioutil.ReadAll(resp.Body)
 		return string(body), err
 	}
-}
 
-func ComposeURL(path string, queries map[string]string) string {
-	if len(queries) == 0 {
-		return path
-	}
-	return fmt.Sprintf(
-		"%s?%s",
-		path,
-		marshalQueries(queries),
-	)
-}
-
-func marshalQueries(kv map[string]string) string {
-	if len(kv) == 0 {
-		return ""
-	}
-
-	var ret string
-	for k, v := range kv {
-		pair := k + "=" + v + "&"
-		ret += pair
-	}
-	return ret[:len(ret)-1]
 }
