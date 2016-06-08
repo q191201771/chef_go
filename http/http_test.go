@@ -6,7 +6,7 @@ import (
 )
 
 func TestGet(t *testing.T) {
-	log.Println(Get("http://www.baidu.com", nil, nil))
+	log.Println(Get("http://www.baidu.com", nil, nil, nil))
 }
 
 func TestComposeUrl(t *testing.T) {

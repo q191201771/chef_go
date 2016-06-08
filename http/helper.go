@@ -2,8 +2,17 @@ package http
 
 import (
 	"fmt"
+	"net/http"
 	"net/url"
 )
+
+func Cookies2Values(cookies map[string]*http.Cookie) map[string]string {
+	ret := make(map[string]string, len(cookies))
+	for k, v := range cookies {
+		ret[k] = v.Value
+	}
+	return ret
+}
 
 func ComposeURL(path string, queries map[string]string) string {
 	if len(queries) == 0 {
