@@ -43,7 +43,7 @@ func fetch(method string, path string, params map[string]string, headers map[str
 
 	/// some default header,can be overwrite by param[headers]
 	if method == "POST" {
-		req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+		req.Header.Set("Content-Type", CONTENT_TYPE_FORM_URL_ENCODE)
 	}
 	req.Header.Set("Accept-Encoding", "gzip")
 	req.Header.Set("User-Agent", MOCK_UA_MAC_CHROME)
