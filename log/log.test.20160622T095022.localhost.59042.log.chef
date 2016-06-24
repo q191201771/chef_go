@@ -1,0 +1,5 @@
+0622 09:50:22 | INFO | I'm Info
+0622 09:50:22 | NOTI | I'm Notice
+0622 09:50:22 | WARN | I'm Warning
+0622 09:50:22 | ERRO | I'm Error
+0622 09:50:22 | CRIT | I'm Critical
